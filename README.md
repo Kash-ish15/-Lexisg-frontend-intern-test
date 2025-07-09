@@ -4,19 +4,24 @@ How to run
 2. npm install
 3. npm run dev
 
+
+
 Screenshot and screenrecording are in readme.md in -Lexisg-frontend-intern-test
 
 
+
+
 🔗 Citation Linking – How It Works
-This project simulates how legal AI tools (like Lexi) handle citations by linking AI-generated answers to real legal documents (PDFs).
-Each citation contains:
+This project simulates how legal AI tools (like Lexi) handle citations by linking AI-generated answers to relevant legal documents (PDFs). Each citation includes:
 
-Citation Flow
-Simulated API Response
-In App.jsx, a hardcoded response is used to simulate an API that returns an answer with citations:
-The content of response it stored in array form with object like  key value pair for text, source and link.
+1.A quote or snippet from the document
+2.The name of the source file (PDF)
+3.A clickable link that opens the source (optionally using #page=... to simulate jumping to the correct section)
 
-Copy code
+🧠Citation Flow
+1.Simulated API Response
+In App.jsx, a hardcoded API response is used to simulate a legal assistant’s output. The response is stored as a JavaScript object containing an answer and a citations array. Each citation includes text, source, and link fields
+
 const response = {
   answer: "Yes, under Section 166 of the Motor Vehicles Act, 1988...",
   citations: [
@@ -27,15 +32,15 @@ const response = {
     }
   ]
 };
-Citation Data Propagation
-The response object is passed down from App.jsx to Answer.jsx via props. Citations are displayed below the answer.
+2.Citation Data Propagation
+The response object is passed from App.jsx to Answer.jsx via props.
+ * The answer is displayed at the top.
+ * The citations array is iterated using .map() to render an unordered list.
+Each citation includes:
+✅ Quoted text
+📄 Source file name
+🔗 A clickable PDF link
 
-In Answer.jsx, each citation is rendered with: using map method that stores in an unordered list
-Quoted text
-Source file name
-A link (usually with #page=...) that opens the PDF to the relevant section
-
-Example rendering:
  <ul className="list-disc pl-5 space-y-2">
         {answerData.citations.map((citation, index) => (
           <li key={index}>
@@ -50,3 +55,4 @@ Example rendering:
             </a>
           </li>
  </ul>
+ This structure mimics real-world legal tools by providing direct links to supporting documents based on AI-generated answers.
